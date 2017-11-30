@@ -6,12 +6,16 @@
   [longitude]="mapCentre.lng"
   [zoom]="mapCentre.zoom">
   <agm-marker
-    *ngFor="let m of markers"
+    *ngFor="let m of markers; let i = index"
     [latitude]="m.lat"
     [longitude]="m.lng"
-    [title]="m.title">
-    <agm-info-window>
-      {{ m.title }}
+    [label]="m.bikes"
+    [title]="m.location"
+    (markerClick)="clickedMarker(m.label, infoWindow, i)">
+    <agm-info-window #infoWindow>
+      <h4>{{ m.location }}</h4>
+      <p>Bikes: {{ m.bikes }}</p>
+      <p>Free Docks: {{ m.emptyDocks }}</p>
     </agm-info-window>
   </agm-marker>
 </agm-map>

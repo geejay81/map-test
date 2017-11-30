@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { BikePointService } from './bike-point.service';
+import { BikePointService } from './bikePoint.service';
 
 describe('BikePointService', () => {
   beforeEach(() => {
