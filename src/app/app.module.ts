@@ -23,7 +23,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDSh9mnb2WeKtJkh9pVnL12GVawgZv6ioE'
+      apiKey: ''
     }),
     HttpClientModule
   ],
