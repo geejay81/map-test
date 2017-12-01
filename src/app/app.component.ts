@@ -1,4 +1,4 @@
-import { BikePointService } from './bikePoint.service';
+import { BikePointService } from './services/bike-point/bike-point.service';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 

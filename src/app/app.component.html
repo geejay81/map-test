@@ -1,6 +1,4 @@
-<h1>{{ title }}</h1>
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
+<app-header title="{{ title }}"></app-header>
 <agm-map
   [latitude]="mapCentre.lat"
   [longitude]="mapCentre.lng"
@@ -9,7 +7,7 @@
     *ngFor="let m of markers; let i = index"
     [latitude]="m.lat"
     [longitude]="m.lng"
-    [label]="m.bikes"
+    [label]="{ text: m.bikes, color: '#000' }"
     [title]="m.location"
     (markerClick)="clickedMarker(m.label, infoWindow, i)">
     <agm-info-window #infoWindow>

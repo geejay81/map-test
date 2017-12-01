@@ -7,19 +7,21 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
-import { BikePointService } from './bikePoint.service';
+import { BikePointService } from './services/bike-point/bike-point.service';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR API KEY'
+      apiKey: 'AIzaSyDSh9mnb2WeKtJkh9pVnL12GVawgZv6ioE'
     }),
     HttpClientModule
   ],
