@@ -20,6 +20,15 @@ export class AppComponent implements OnInit {
     { id: 'Dock', value: 'I\'m looking for a free dock'}
   ];
   lookingFor = 'Bike';
+  modalClasses = 'modal';
+  selectedBikePoint = {
+    lng: this.mapCentre.lng,
+    lat: this.mapCentre.lat,
+    location: '',
+    bikes: '',
+    emptyDocks: '',
+    docks: ''
+  };
 
   constructor(
     private bikePointService: BikePointService
@@ -29,14 +38,14 @@ export class AppComponent implements OnInit {
     this.markers = this.bikePointService.getBikePoints();
   }
 
-  clickedMarker(label: string, infoWindow, index: number) {
-    if (this.infoWindowOpened ===  infoWindow) {
-      return;
-    }
-    if (this.infoWindowOpened !== null) {
-      this.infoWindowOpened.close();
-    }
-    this.infoWindowOpened = infoWindow;
+  clickedMarker(label: string, index: number) {
+    this.selectedBikePoint = this.markers[index];
+    this.modalClasses = 'modal is-active';
+    // TODO: Centre map on clicked marker
+  }
+
+  closeModal() {
+    this.modalClasses = 'modal';
   }
 
   refreshAll() {

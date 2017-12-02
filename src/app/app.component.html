@@ -1,8 +1,8 @@
 <app-header></app-header>
 <section class="section">
   <div class="container">
-    <div class="field">
-      <label class="label is-medium">What are you looking for?</label>
+    <label class="label is-medium">What are you looking for?</label>
+    <div class="field has-addons">
       <div class="control is-expanded">
         <div class="select is-fullwidth is-medium">
           <select
@@ -15,7 +15,9 @@
           </select>
         </div>
       </div>
-      <button class="button is-primary" type="button" (change)="refreshAll()">Refresh</button>
+      <div class="control">
+        <button class="button is-primary is-medium" type="button" (change)="refreshAll()">Refresh</button>
+      </div>
     </div>
   </div>
 </section>
@@ -28,15 +30,37 @@
   *ngFor="let m of markers; let i = index"
   [latitude]="m.lat"
   [longitude]="m.lng"
-  [label]="lookingFor == 'Bike' ? m.bikes : m.emptyDocks"
+  [label]="lookingFor == 'Bike' ? m.bikes.toString() : m.emptyDocks.toString()"
   [title]="m.location"
-  (markerClick)="clickedMarker(m.label, infoWindow, i)">
-  <agm-info-window #infoWindow>
-    <h4>{{ m.location }}</h4>
-    <p>Bikes: {{ m.bikes }}</p>
-    <p>Free Docks: {{ m.emptyDocks }}</p>
-  </agm-info-window>
+  (markerClick)="clickedMarker(m.label, i)">
 </agm-marker>
 </agm-map>
+
+<div class="{{ modalClasses }}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">{{ selectedBikePoint.location }}</p>
+        <button class="delete" aria-label="close" (click)="closeModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <p>
+          Bikes: {{ selectedBikePoint.bikes }}
+        </p>
+        <p>
+          Free Docks: {{ selectedBikePoint.emptyDocks }}
+        </p>
+        <p>
+          Total Docks: {{ selectedBikePoint.docks }}
+        </p>
+      </section>
+      <footer class="modal-card-foot">
+        <progress class="progress is-primary" value="{{ selectedBikePoint.bikes }}" max="{{ selectedBikePoint.docks }}"></progress>
+      </footer>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="closeModal()"></button>
+</div>
 
 <app-footer></app-footer>
