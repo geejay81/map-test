@@ -1,7 +1,8 @@
 import { BikePointService } from './services/bike-point/bike-point.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
+import { AgmMap } from '@agm/core/directives/map';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild(AgmMap) private map: any;
   title = 'TfL Bike Points';
   mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
   markers = [];
@@ -19,15 +21,12 @@ export class AppComponent implements OnInit {
   ];
   lookingFor = 'Bike';
 
-  constructor(private bikePointService: BikePointService) {}
+  constructor(
+    private bikePointService: BikePointService
+  ) {}
 
   ngOnInit(): void {
     this.markers = this.bikePointService.getBikePoints();
-  }
-
-  lookingForChanged() {
-    //
-    alert('This will update the map when I\'ve set it up properly');
   }
 
   clickedMarker(label: string, infoWindow, index: number) {
@@ -38,5 +37,10 @@ export class AppComponent implements OnInit {
       this.infoWindowOpened.close();
     }
     this.infoWindowOpened = infoWindow;
+  }
+
+  refreshAll() {
+    // trigger redraw of the map so that the markers can be refilled
+    this.map.triggerResize();
   }
 }
