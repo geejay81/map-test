@@ -1,37 +1,41 @@
-<app-header title="{{ title }}"></app-header>
+<app-header></app-header>
 <section class="section">
   <div class="container">
-    <div class="field has-addons">
+    <div class="field">
+      <label class="label is-medium">What are you looking for?</label>
       <div class="control is-expanded">
-        <div class="select is-fullwidth">
-          <select name="country">
-            <option value="Bikes">I'm looking for a bike</option>
-            <option value="Docks">I'm dropping off a bike</option>
+        <div class="select is-fullwidth is-medium">
+          <select
+            name="lookingFor"
+            [(ngModel)]="lookingFor"
+            (change)="lookingForChanged()">
+            <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
+              {{ option.value }}
+            </option>
           </select>
         </div>
       </div>
-      <div class="control">
-        <button type="button" class="button is-primary">Find</button>
-      </div>
     </div>
-    <agm-map
-      [latitude]="mapCentre.lat"
-      [longitude]="mapCentre.lng"
-      [zoom]="mapCentre.zoom">
-      <agm-marker
-        *ngFor="let m of markers; let i = index"
-        [latitude]="m.lat"
-        [longitude]="m.lng"
-        [label]="{ text: m.bikes, color: '#000' }"
-        [title]="m.location"
-        (markerClick)="clickedMarker(m.label, infoWindow, i)">
-        <agm-info-window #infoWindow>
-          <h4>{{ m.location }}</h4>
-          <p>Bikes: {{ m.bikes }}</p>
-          <p>Free Docks: {{ m.emptyDocks }}</p>
-        </agm-info-window>
-      </agm-marker>
-    </agm-map>
   </div>
 </section>
+
+<agm-map
+[latitude]="mapCentre.lat"
+[longitude]="mapCentre.lng"
+[zoom]="mapCentre.zoom">
+<agm-marker
+  *ngFor="let m of markers; let i = index"
+  [latitude]="m.lat"
+  [longitude]="m.lng"
+  [label]="lookingFor == 'Bike' ? m.bikes : m.docks"
+  [title]="m.location"
+  (markerClick)="clickedMarker(m.label, infoWindow, i)">
+  <agm-info-window #infoWindow>
+    <h4>{{ m.location }}</h4>
+    <p>Bikes: {{ m.bikes }}</p>
+    <p>Free Docks: {{ m.emptyDocks }}</p>
+  </agm-info-window>
+</agm-marker>
+</agm-map>
+
 <app-footer></app-footer>
