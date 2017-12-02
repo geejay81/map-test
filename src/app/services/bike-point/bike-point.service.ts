@@ -13,17 +13,17 @@ export class BikePointService {
     .subscribe(
       data => {
         data.forEach(point => {
-            let bikes = '0';
-            let emptyDocks = '0';
-            let docks = '0';
+            let bikes = 0;
+            let emptyDocks = 0;
+            let docks = 0;
 
             point.additionalProperties.forEach(property => {
               if (property.key === 'NbBikes') {
-                bikes = property.value;
+                bikes = Number(property.value);
               } else if (property.key === 'NbEmptyDocks') {
-                emptyDocks = property.value;
+                emptyDocks = Number(property.value);
               } else if (property.key === 'NbDocks') {
-                docks = property.value;
+                docks = Number(property.value);
               }
             });
 
