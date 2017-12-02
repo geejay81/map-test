@@ -8,13 +8,14 @@
           <select
             name="lookingFor"
             [(ngModel)]="lookingFor"
-            (change)="lookingForChanged()">
+            (change)="refreshAll()">
             <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
               {{ option.value }}
             </option>
           </select>
         </div>
       </div>
+      <button class="button is-primary" type="button" (change)="refreshAll()">Refresh</button>
     </div>
   </div>
 </section>
@@ -27,7 +28,7 @@
   *ngFor="let m of markers; let i = index"
   [latitude]="m.lat"
   [longitude]="m.lng"
-  [label]="lookingFor == 'Bike' ? m.bikes : m.docks"
+  [label]="lookingFor == 'Bike' ? m.bikes : m.emptyDocks"
   [title]="m.location"
   (markerClick)="clickedMarker(m.label, infoWindow, i)">
   <agm-info-window #infoWindow>
