@@ -1,0 +1,29 @@
+<button
+  class="button is-primary is-medium"
+  type="button"
+  (click)="clickAirQualityForecast()">
+  <i class="fa fa-cloud">&nbsp;</i>Air Quality Forecast
+</button>
+
+<div class="{{ airQualityModalClasses }}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Air Quality</p>
+        <button class="delete" aria-label="close" (click)="closeAirQualityForecast()"></button>
+      </header>
+      <section class="modal-card-body">
+        <div  *ngFor="let forecast of airQualityData.currentForecast">
+          <h3>{{ forecast.forecastType }}</h3>
+          <p>{{ forecast.forecastSummary }}</p>
+        </div>
+        <p class="">{{ airQualityData.disclaimerText }}</p>
+      </section>
+      <footer class="modal-card-footer">
+        <p></p>
+      </footer>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="closeAirQualityForecast()"></button>
+</div>
