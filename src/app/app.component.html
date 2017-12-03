@@ -56,7 +56,7 @@
         </p>
       </section>
       <footer class="modal-card-foot">
-        <progress class="progress is-primary" value="{{ selectedBikePoint.bikes }}" max="{{ selectedBikePoint.docks }}"></progress>
+        <progress class="{{ getProgressClasses() }}" value="{{ selectedBikePoint.bikes }}" max="{{ selectedBikePoint.docks }}"></progress>
       </footer>
     </div>
   </div>
