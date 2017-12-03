@@ -1,6 +1,6 @@
-# MapTest
+# Map-Test
 
-To run this project you will need to get a Google Maps API key and paste it in to app.module.ts.
+To run this project you will need to get a Google Maps API key and paste it in to /environments/environment files as the value to the mapApiKey key.
 
 To see a demo, go to https://geejay81.github.io/map-test
 

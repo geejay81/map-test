@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
@@ -23,7 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDSh9mnb2WeKtJkh9pVnL12GVawgZv6ioE'
+      apiKey: environment.mapApiKey
     }),
     HttpClientModule
   ],
