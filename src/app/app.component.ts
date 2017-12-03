@@ -21,13 +21,14 @@ export class AppComponent implements OnInit {
   ];
   lookingFor = 'Bike';
   modalClasses = 'modal';
+  progressType: 'is-success';
   selectedBikePoint = {
     lng: this.mapCentre.lng,
     lat: this.mapCentre.lat,
     location: '',
-    bikes: '',
-    emptyDocks: '',
-    docks: ''
+    bikes: 0,
+    emptyDocks: 0,
+    docks: 0
   };
 
   constructor(
@@ -46,6 +47,20 @@ export class AppComponent implements OnInit {
 
   closeModal() {
     this.modalClasses = 'modal';
+  }
+
+  getProgressClasses() {
+    let progressClasses = 'progress';
+    const tracking = this.lookingFor === 'Bike' ? this.selectedBikePoint.bikes : this.selectedBikePoint.emptyDocks
+    const usage = tracking / this.selectedBikePoint.docks;
+    if (usage < 0.2) {
+      progressClasses += ' is-danger';
+    } else if (usage < 0.3) {
+      progressClasses += ' is-warning';
+    } else {
+      progressClasses += ' is-success';
+    }
+    return progressClasses;
   }
 
   refreshAll() {
