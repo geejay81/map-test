@@ -9,15 +9,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
 import { BikePointService } from './services/bike-point/bike-point.service';
+import { AirQualityService } from './services/air-quality/air-quality.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AirQualityComponent } from './tfl-components/air-quality/air-quality/air-quality.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AirQualityComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { FooterComponent } from './footer/footer.component';
     }),
     HttpClientModule
   ],
-  providers: [BikePointService],
+  providers: [BikePointService, AirQualityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
