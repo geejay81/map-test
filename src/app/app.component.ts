@@ -106,6 +106,8 @@ export class AppComponent implements OnInit {
 
   refreshAll() {
     // trigger redraw of the map so that the markers can be refilled
+    this.controlsDisabled = true;
     this.map.triggerResize();
+    this.controlsDisabled = false;
   }
 }
