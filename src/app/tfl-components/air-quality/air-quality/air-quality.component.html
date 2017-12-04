@@ -1,14 +1,16 @@
 <button
   class="button is-primary is-medium"
   type="button"
-  (click)="clickAirQualityForecast()">
+  (click)="clickAirQualityForecast()"
+  [disabled]="buttonDisabled"
+  style="margin-top: 10px;">
   <i class="fa fa-cloud">&nbsp;</i>Air Quality Forecast
 </button>
 
-<div class="{{ airQualityModalClasses }}">
+<div [ngClass]="airQualityModalClasses">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <div class="modal-card">
+    <div class="modal-card" style="margin: 0;">
       <header class="modal-card-head">
         <p class="modal-card-title">Air Quality</p>
         <button class="delete" aria-label="close" (click)="closeAirQualityForecast()"></button>

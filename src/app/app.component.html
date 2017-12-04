@@ -1,12 +1,6 @@
 <app-header [siteTitle]="siteTitle" [pageTitle]="pageTitle" [pageSubtitle]="pageSubtitle"></app-header>
 <section class="section">
   <div class="container">
-    <button class="button is-primary is-medium" type="button" (change)="refreshAll()">
-      <i class="fa fa-refresh">&nbsp;</i>Refresh
-    </button>
-    <app-air-quality></app-air-quality>
-  </div>
-  <div class="container">
     <div class="field">
       <label class="label is-medium">What are you looking for?</label>
       <div class="control is-expanded">
@@ -14,7 +8,8 @@
           <select
             name="lookingFor"
             [(ngModel)]="lookingFor"
-            (change)="refreshAll()">
+            (change)="refreshAll()"
+            [disabled]="controlsDisabled">
             <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
               {{ option.value }}
             </option>
@@ -22,6 +17,17 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (change)="refreshAll()"
+      [disabled]="controlsDisabled"
+      style="margin-top: 10px;">
+      <i class="fa fa-refresh">&nbsp;</i>Refresh
+    </button>
+    <app-air-quality></app-air-quality>
   </div>
 </section>
 
@@ -42,7 +48,7 @@
 <div class="{{ modalClasses }}">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <div class="modal-card">
+    <div class="modal-card" style="margin: 0;">
       <header class="modal-card-head">
         <p class="modal-card-title">{{ selectedBikePoint.location }}</p>
         <button class="delete" aria-label="close" (click)="closeModal()"></button>

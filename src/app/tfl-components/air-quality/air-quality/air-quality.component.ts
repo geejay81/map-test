@@ -1,5 +1,5 @@
 import { AirQualityForecast, AirQualityForecastPeriod } from './../../../models/air-quality-forecast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AirQualityService } from '../../../services/air-quality/air-quality.service';
 
 @Component({
@@ -8,38 +8,45 @@ import { AirQualityService } from '../../../services/air-quality/air-quality.ser
   styleUrls: ['./air-quality.component.css']
 })
 export class AirQualityComponent implements OnInit {
-  // airQualityData: AirQualityForecast;
-  airQualityData: any;
+  buttonDisabled = false;
+  airQualityData: any = this.getDummyAirQualityDataModal();
   airQualityModalClasses = 'modal';
 
   constructor(private airQualityService: AirQualityService) { }
 
   ngOnInit() {
-    this.airQualityService.getAirQualityForecast().subscribe(data => {
-      this.airQualityData = data;
-
-      /*this.airQualityData = new AirQualityForecast(data.disclaimerText);
-      data.forEach(forecast => {
-        this.airQualityData.currentForecast.push(
-          new AirQualityForecastPeriod(
-            forecast.forecastType,
-            forecast.forecastBand,
-            forecast.forecastSummary,
-            forecast.forecastText
-          )
-        );
-      });
-      */
-    });
   }
 
   clickAirQualityForecast() {
-    console.log(this.airQualityData);
-    this.airQualityModalClasses = 'modal is-active';
+    this.buttonDisabled = true;
+    this.airQualityService.getAirQualityForecast().subscribe(
+      data => {
+        this.airQualityData = data;
+        this.airQualityModalClasses = 'modal is-active';
+        this.buttonDisabled = false;
+      },
+      error => {
+        this.buttonDisabled = true;
+        console.log(error);
+      });
   }
 
   closeAirQualityForecast() {
     this.airQualityModalClasses = 'modal';
+  }
+
+  getDummyAirQualityDataModal() {
+      return {
+        disclaimerText: '',
+        currentForecast: [
+          {
+            forecastType: '',
+            forecastBand: '',
+            forecastSummary: '',
+            forecastText: ''
+          }
+        ]
+      };
   }
 
 }

@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BikePointService {
-  private markers = [];
+  // private markers = [];
   private bikePointUrl = 'https://api.tfl.gov.uk/BikePoint';
 
   constructor(private http: HttpClient) { }
 
   getBikePoints() {
-    this.http.get<Array<any>>(this.bikePointUrl)
+    return this.http.get<Array<any>>(this.bikePointUrl);
+    /*
     .subscribe(
       data => {
         data.forEach(point => {
@@ -40,6 +41,7 @@ export class BikePointService {
     );
 
     return this.markers;
+    */
   }
 
 }
