@@ -1,11 +1,12 @@
 <button
   class="button is-primary is-medium"
   type="button"
-  (click)="clickAirQualityForecast()">
+  (click)="clickAirQualityForecast()"
+  [disabled]="buttonDisabled">
   <i class="fa fa-cloud">&nbsp;</i>Air Quality Forecast
 </button>
 
-<div class="{{ airQualityModalClasses }}">
+<div [ngClass]="airQualityModalClasses">
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="modal-card">
