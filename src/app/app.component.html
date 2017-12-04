@@ -1,12 +1,6 @@
 <app-header [siteTitle]="siteTitle" [pageTitle]="pageTitle" [pageSubtitle]="pageSubtitle"></app-header>
 <section class="section">
   <div class="container">
-    <button class="button is-primary is-medium" type="button" (change)="refreshAll()">
-      <i class="fa fa-refresh">&nbsp;</i>Refresh
-    </button>
-    <app-air-quality></app-air-quality>
-  </div>
-  <div class="container">
     <div class="field">
       <label class="label is-medium">What are you looking for?</label>
       <div class="control is-expanded">
@@ -22,6 +16,16 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (change)="refreshAll()"
+      style="margin-top: 10px;">
+      <i class="fa fa-refresh">&nbsp;</i>Refresh
+    </button>
+    <app-air-quality></app-air-quality>
   </div>
 </section>
 
