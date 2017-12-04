@@ -10,6 +10,9 @@ import { AgmMap } from '@agm/core/directives/map';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  siteTitle = 'TfL Cycle Docs Info';
+  pageTitle = 'Bike Points';
+  pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
   @ViewChild(AgmMap) private map: any;
   title = 'TfL Bike Points';
   mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
