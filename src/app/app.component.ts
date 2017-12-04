@@ -10,21 +10,19 @@ import { AgmMap } from '@agm/core/directives/map';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  @ViewChild(AgmMap) private map: any;
   siteTitle = 'TfL Cycle Dock Info';
   pageTitle = 'Bike Points';
   pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
-  @ViewChild(AgmMap) private map: any;
-  title = 'TfL Bike Points';
+  lookingFor = 'Bike';
+  modalClasses = 'modal';
+  progressType: 'is-success';
+  controlsDisabled = false;
   mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
-  markers = [];
-  infoWindowOpened = null;
   lookingForOptions = [
     { id: 'Bike', value: 'I\'m looking for a bike'},
     { id: 'Dock', value: 'I\'m looking for a free dock'}
   ];
-  lookingFor = 'Bike';
-  modalClasses = 'modal';
-  progressType: 'is-success';
   selectedBikePoint = {
     lng: this.mapCentre.lng,
     lat: this.mapCentre.lat,
@@ -33,13 +31,14 @@ export class AppComponent implements OnInit {
     emptyDocks: 0,
     docks: 0
   };
+  markers = [];
 
   constructor(
     private bikePointService: BikePointService
   ) {}
 
   ngOnInit(): void {
-    this.markers = this.bikePointService.getBikePoints();
+    this.refreshMarkersArray();
   }
 
   clickedMarker(label: string, index: number) {
@@ -64,6 +63,45 @@ export class AppComponent implements OnInit {
       progressClasses += ' is-success';
     }
     return progressClasses;
+  }
+
+  refreshMarkersArray() {
+    this.controlsDisabled = true;
+    this.bikePointService.getBikePoints()
+    .subscribe(
+      data => {
+        data.forEach(point => {
+            let bikes = 0;
+            let emptyDocks = 0;
+            let docks = 0;
+
+            point.additionalProperties.forEach(property => {
+              if (property.key === 'NbBikes') {
+                bikes = Number(property.value);
+              } else if (property.key === 'NbEmptyDocks') {
+                emptyDocks = Number(property.value);
+              } else if (property.key === 'NbDocks') {
+                docks = Number(property.value);
+              }
+            });
+
+            this.markers.push({
+                lng: point.lon,
+                lat: point.lat,
+                location: point.commonName,
+                bikes: bikes,
+                emptyDocks: emptyDocks,
+                docks: docks
+              });
+
+            this.controlsDisabled = false;
+        });
+      },
+      error => {
+        this.controlsDisabled = false;
+        console.log(error);
+      }
+    );
   }
 
   refreshAll() {
