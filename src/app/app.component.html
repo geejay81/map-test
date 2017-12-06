@@ -22,7 +22,15 @@
     <button
       class="button is-primary is-medium"
       type="button"
-      (change)="refreshAll()"
+      (click)="locateMe()"
+      [disabled]="controlsDisabled"
+      style="margin-top: 10px;">
+      <i class="fa fa-location-arrow">&nbsp;</i>Find Me
+    </button>
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (click)="refreshAll()"
       [disabled]="controlsDisabled"
       style="margin-top: 10px;">
       <i class="fa fa-refresh">&nbsp;</i>Refresh

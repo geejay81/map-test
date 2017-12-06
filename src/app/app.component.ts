@@ -1,8 +1,9 @@
 import { BikePointService } from './services/bike-point/bike-point.service';
 import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
+import { GoogleMapsAPIWrapper, MapsAPILoader } from '@agm/core';
 import { AgmMap } from '@agm/core/directives/map';
+import { google } from '@agm/core/services/google-maps-types';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +12,19 @@ import { AgmMap } from '@agm/core/directives/map';
 })
 export class AppComponent implements OnInit {
   @ViewChild(AgmMap) private map: any;
-  siteTitle = 'TfL Cycle Dock Info';
-  pageTitle = 'Bike Points';
-  pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
-  lookingFor = 'Bike';
-  modalClasses = 'modal';
-  progressType: 'is-success';
-  controlsDisabled = false;
-  mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
-  lookingForOptions = [
+  private siteTitle = 'TfL Cycle Dock Info';
+  private pageTitle = 'Bike Points';
+  private pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
+  private lookingFor = 'Bike';
+  private modalClasses = 'modal';
+  private progressType: 'is-success';
+  private controlsDisabled = false;
+  private mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
+  private lookingForOptions = [
     { id: 'Bike', value: 'I\'m looking for a bike'},
     { id: 'Dock', value: 'I\'m looking for a free dock'}
   ];
-  selectedBikePoint = {
+  private selectedBikePoint = {
     lng: this.mapCentre.lng,
     lat: this.mapCentre.lat,
     location: '',
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
     emptyDocks: 0,
     docks: 0
   };
-  markers = [];
+  private markers = [];
+  private geolocation;
 
   constructor(
     private bikePointService: BikePointService
@@ -39,6 +41,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshMarkersArray();
+  }
+
+  centreMap() {
+    this.map.triggerResize();
   }
 
   clickedMarker(label: string, index: number) {
@@ -63,6 +69,32 @@ export class AppComponent implements OnInit {
       progressClasses += ' is-success';
     }
     return progressClasses;
+  }
+
+  locateMe() {
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.mapCentre.lat = position.coords.latitude;
+          this.mapCentre.lng = position.coords.longitude;
+          console.log(position);
+        },
+        error => {
+          switch (error.code) {
+            case 1:
+              alert('Permission Denied');
+              break;
+            case 2:
+              alert('Position Unavailable');
+              break;
+            case 3:
+              alert('Timeout');
+              break;
+          }
+        }
+      );
+      this.centreMap();
+    }
   }
 
   refreshMarkersArray() {
@@ -105,8 +137,8 @@ export class AppComponent implements OnInit {
   }
 
   refreshAll() {
-    // trigger redraw of the map so that the markers can be refilled
     this.controlsDisabled = true;
+    this.refreshMarkersArray();
     this.map.triggerResize();
     this.controlsDisabled = false;
   }
