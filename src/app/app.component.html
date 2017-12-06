@@ -42,7 +42,8 @@
 <agm-map
 [latitude]="mapCentre.lat"
 [longitude]="mapCentre.lng"
-[zoom]="mapCentre.zoom">
+[zoom]="mapCentre.zoom"
+[draggable]="true">
 <agm-marker
   *ngFor="let m of markers; let i = index"
   [latitude]="m.lat"

@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
     docks: 0
   };
   markers = [];
-  geolocation;
 
   constructor(
     private bikePointService: BikePointService
