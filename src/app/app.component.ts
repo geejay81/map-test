@@ -1,7 +1,7 @@
 import { BikePointService } from './services/bike-point/bike-point.service';
 import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-import { GoogleMapsAPIWrapper, MapsAPILoader } from '@agm/core';
+import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { AgmMap } from '@agm/core/directives/map';
 import { google } from '@agm/core/services/google-maps-types';
 
@@ -11,20 +11,20 @@ import { google } from '@agm/core/services/google-maps-types';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild(AgmMap) private map: any;
-  private siteTitle = 'TfL Cycle Dock Info';
-  private pageTitle = 'Bike Points';
-  private pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
-  private lookingFor = 'Bike';
-  private modalClasses = 'modal';
-  private progressType: 'is-success';
-  private controlsDisabled = false;
-  private mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
-  private lookingForOptions = [
+  @ViewChild(AgmMap) map: any;
+  siteTitle = 'TfL Cycle Dock Info';
+  pageTitle = 'Bike Points';
+  pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
+  lookingFor = 'Bike';
+  modalClasses = 'modal';
+  progressType: 'is-success';
+  controlsDisabled = false;
+  mapCentre = { lat: 51.5081, lng: -0.1248, zoom: 16 };
+  lookingForOptions = [
     { id: 'Bike', value: 'I\'m looking for a bike'},
     { id: 'Dock', value: 'I\'m looking for a free dock'}
   ];
-  private selectedBikePoint = {
+  selectedBikePoint = {
     lng: this.mapCentre.lng,
     lat: this.mapCentre.lat,
     location: '',
@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
     emptyDocks: 0,
     docks: 0
   };
-  private markers = [];
-  private geolocation;
+  markers = [];
+  geolocation;
 
   constructor(
     private bikePointService: BikePointService
@@ -50,7 +50,9 @@ export class AppComponent implements OnInit {
   clickedMarker(label: string, index: number) {
     this.selectedBikePoint = this.markers[index];
     this.modalClasses = 'modal is-active';
-    // TODO: Centre map on clicked marker
+    this.mapCentre.lat = this.selectedBikePoint.lat;
+    this.mapCentre.lng = this.selectedBikePoint.lng;
+    this.centreMap();
   }
 
   closeModal() {
@@ -78,6 +80,7 @@ export class AppComponent implements OnInit {
           this.mapCentre.lat = position.coords.latitude;
           this.mapCentre.lng = position.coords.longitude;
           console.log(position);
+          this.centreMap();
         },
         error => {
           switch (error.code) {
@@ -93,7 +96,6 @@ export class AppComponent implements OnInit {
           }
         }
       );
-      this.centreMap();
     }
   }
 
