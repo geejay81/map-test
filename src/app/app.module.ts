@@ -13,6 +13,7 @@ import { AirQualityService } from './services/air-quality/air-quality.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AirQualityComponent } from './tfl-components/air-quality/air-quality/air-quality.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AirQualityComponent } from './tfl-components/air-quality/air-quality/ai
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AirQualityComponent
+    AirQualityComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
