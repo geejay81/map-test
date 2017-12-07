@@ -1,0 +1,83 @@
+<app-header [siteTitle]="siteTitle" [pageTitle]="pageTitle" [pageSubtitle]="pageSubtitle"></app-header>
+<section class="section">
+  <div class="container">
+    <div class="field">
+      <label class="label is-medium">What are you looking for?</label>
+      <div class="control is-expanded">
+        <div class="select is-fullwidth is-medium">
+          <select
+            name="lookingFor"
+            [(ngModel)]="lookingFor"
+            (change)="refreshAll()"
+            [disabled]="controlsDisabled">
+            <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
+              {{ option.value }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (click)="locateMe()"
+      [disabled]="controlsDisabled"
+      style="margin-top: 10px;">
+      <i class="fa fa-location-arrow">&nbsp;</i>Find Me
+    </button>
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (click)="refreshAll()"
+      [disabled]="controlsDisabled"
+      style="margin-top: 10px;">
+      <i class="fa fa-refresh">&nbsp;</i>Refresh
+    </button>
+    <app-air-quality></app-air-quality>
+  </div>
+</section>
+
+<agm-map
+[latitude]="mapCentre.lat"
+[longitude]="mapCentre.lng"
+[zoom]="mapCentre.zoom">
+<agm-marker
+  *ngFor="let m of markers; let i = index"
+  [latitude]="m.lat"
+  [longitude]="m.lng"
+  [label]="lookingFor == 'Bike' ? m.bikes.toString() : m.emptyDocks.toString()"
+  [title]="m.location"
+  (markerClick)="clickedMarker(m.label, i)">
+</agm-marker>
+</agm-map>
+
+<div class="{{ modalClasses }}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="modal-card" style="margin: 0;">
+      <header class="modal-card-head">
+        <p class="modal-card-title">{{ selectedBikePoint.location }}</p>
+        <button class="delete" aria-label="close" (click)="closeModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        <p>
+          Bikes: {{ selectedBikePoint.bikes }}
+        </p>
+        <p>
+          Free Docks: {{ selectedBikePoint.emptyDocks }}
+        </p>
+        <p>
+          Total Docks: {{ selectedBikePoint.docks }}
+        </p>
+      </section>
+      <footer class="modal-card-foot">
+        <progress class="{{ getProgressClasses() }}" value="{{ selectedBikePoint.bikes }}" max="{{ selectedBikePoint.docks }}"></progress>
+      </footer>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="closeModal()"></button>
+</div>
+
+<app-footer></app-footer>
