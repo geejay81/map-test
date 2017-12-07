@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { AgmMap } from '@agm/core/directives/map';
+import { google } from '@agm/core/services/google-maps-types';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AgmMap } from '@agm/core/directives/map';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild(AgmMap) private map: any;
+  @ViewChild(AgmMap) map: any;
   siteTitle = 'TfL Cycle Dock Info';
   pageTitle = 'Bike Points';
   pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
@@ -41,10 +42,16 @@ export class AppComponent implements OnInit {
     this.refreshMarkersArray();
   }
 
+  centreMap() {
+    this.map.triggerResize();
+  }
+
   clickedMarker(label: string, index: number) {
     this.selectedBikePoint = this.markers[index];
     this.modalClasses = 'modal is-active';
-    // TODO: Centre map on clicked marker
+    this.mapCentre.lat = this.selectedBikePoint.lat;
+    this.mapCentre.lng = this.selectedBikePoint.lng;
+    this.centreMap();
   }
 
   closeModal() {
@@ -63,6 +70,32 @@ export class AppComponent implements OnInit {
       progressClasses += ' is-success';
     }
     return progressClasses;
+  }
+
+  locateMe() {
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.mapCentre.lat = position.coords.latitude;
+          this.mapCentre.lng = position.coords.longitude;
+          console.log(position);
+          this.centreMap();
+        },
+        error => {
+          switch (error.code) {
+            case 1:
+              alert('Permission Denied');
+              break;
+            case 2:
+              alert('Position Unavailable');
+              break;
+            case 3:
+              alert('Timeout');
+              break;
+          }
+        }
+      );
+    }
   }
 
   refreshMarkersArray() {
@@ -105,8 +138,8 @@ export class AppComponent implements OnInit {
   }
 
   refreshAll() {
-    // trigger redraw of the map so that the markers can be refilled
     this.controlsDisabled = true;
+    this.refreshMarkersArray();
     this.map.triggerResize();
     this.controlsDisabled = false;
   }

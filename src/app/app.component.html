@@ -22,7 +22,15 @@
     <button
       class="button is-primary is-medium"
       type="button"
-      (change)="refreshAll()"
+      (click)="locateMe()"
+      [disabled]="controlsDisabled"
+      style="margin-top: 10px;">
+      <i class="fa fa-location-arrow">&nbsp;</i>Find Me
+    </button>
+    <button
+      class="button is-primary is-medium"
+      type="button"
+      (click)="refreshAll()"
       [disabled]="controlsDisabled"
       style="margin-top: 10px;">
       <i class="fa fa-refresh">&nbsp;</i>Refresh
@@ -34,7 +42,8 @@
 <agm-map
 [latitude]="mapCentre.lat"
 [longitude]="mapCentre.lng"
-[zoom]="mapCentre.zoom">
+[zoom]="mapCentre.zoom"
+[draggable]="true">
 <agm-marker
   *ngFor="let m of markers; let i = index"
   [latitude]="m.lat"
