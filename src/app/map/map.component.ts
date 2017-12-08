@@ -1,5 +1,5 @@
 import { BikePointService } from '../services/bike-point/bike-point.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';
 import { AgmMap } from '@agm/core/directives/map';
@@ -12,9 +12,6 @@ import { google } from '@agm/core/services/google-maps-types';
 })
 export class MapComponent implements OnInit {
   @ViewChild(AgmMap) map: any;
-  siteTitle = 'TfL Cycle Dock Info';
-  pageTitle = 'Bike Points';
-  pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
   lookingFor = 'Bike';
   modalClasses = 'modal';
   progressType: 'is-success';
