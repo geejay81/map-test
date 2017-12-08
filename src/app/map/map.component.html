@@ -1,4 +1,3 @@
-<app-header [siteTitle]="siteTitle" [pageTitle]="pageTitle" [pageSubtitle]="pageSubtitle"></app-header>
 <section class="section">
   <div class="container">
     <div class="field">
@@ -8,7 +7,6 @@
           <select
             name="lookingFor"
             [(ngModel)]="lookingFor"
-            (change)="refreshAll()"
             [disabled]="controlsDisabled">
             <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
               {{ option.value }}

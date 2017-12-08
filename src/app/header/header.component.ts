@@ -9,10 +9,16 @@ export class HeaderComponent implements OnInit {
   @Input() siteTitle: string;
   @Input() pageTitle: string;
   @Input() pageSubtitle: string;
+  navMenuClasses = 'navbar-menu';
 
   constructor() { }
 
   ngOnInit() {
+    //
+  }
+
+  burgerClick() {
+    this.navMenuClasses = this.navMenuClasses === 'navbar-menu' ? 'navbar-menu is-active' : 'navbar-menu';
   }
 
 }
