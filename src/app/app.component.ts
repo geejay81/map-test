@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute, RoutesRecognized } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +8,8 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   siteTitle = 'TfL Cycle Dock Info';
-  @Input() pageTitle = 'Bike Info';
-  @Input() pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
+  pageTitle = 'Bike Info';
+  pageSubtitle = 'Find the nearest bike point with available bikes or free docks';
 
   constructor(
     private router: Router,
@@ -18,9 +18,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.activatedRoute.data.subscribe(data => {
-    //   this.pageTitle = data['pageTitle'];
-    //   this.pageSubtitle = data['pageSubtitle'];
-    // });
+    this.router.events.subscribe((data) => {
+      if (data instanceof RoutesRecognized) {
+        this.pageTitle = data.state.root.firstChild.data.pageTitle;
+        this.pageSubtitle = data.state.root.firstChild.data.pageSubtitle;
+      }
+    });
   }
 }

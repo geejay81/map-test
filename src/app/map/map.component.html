@@ -7,7 +7,6 @@
           <select
             name="lookingFor"
             [(ngModel)]="lookingFor"
-            (change)="refreshAll()"
             [disabled]="controlsDisabled">
             <option *ngFor="let option of lookingForOptions" value="{{ option.id }}">
               {{ option.value }}

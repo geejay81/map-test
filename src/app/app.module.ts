@@ -20,19 +20,27 @@ import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
   {
-    path: 'find',
-    component: MapComponent,
-    data: {
-      pageTitle: 'Bike Points',
-      pageSubTitle: 'Find the nearest bike point with available bikes or free docks'
-    }
-  },
-  {
     path: 'about',
     component: AboutComponent,
     data: {
       pageTitle: 'About',
-      pageSubTitle: 'What does this site do?'
+      pageSubtitle: 'What does this site do?'
+    }
+  },
+  {
+    path: 'find',
+    component: MapComponent,
+    data: {
+      pageTitle: 'Bike Points',
+      pageSubtitle: 'Find the nearest bike point with available bikes or free docks'
+    }
+  },
+  {
+    path: 'travel',
+    component: AboutComponent,
+    data: {
+      pageTitle: 'Travel',
+      pageSubtitle: 'Travel and service updates from around the network'
     }
   },
   { path: '', redirectTo: '/find', pathMatch: 'full' }
