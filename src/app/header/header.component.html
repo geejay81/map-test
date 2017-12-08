@@ -1,34 +1,44 @@
-
 <header class="hero is-primary">
   <div class="hero-head">
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container">
-          <div class="navbar-brand is-large">
-            <a class="navbar-item" href="https://geejay81.github.io/map-test">
-              <i class="fa fa-bicycle fa-lg">&nbsp;</i>{{ siteTitle }}
-            </a>
+    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand is-large">
+          <a class="navbar-item" href="https://geejay81.github.io/map-test">
+            <i class="fa fa-bicycle fa-lg">&nbsp;</i>{{ siteTitle }}
+          </a>
+          <button
+            class="button navbar-burger is-primary"
+            data-target="navMenu"
+            (click)="burgerClick()">
+            <i class="fa fa-bars">&nbsp;</i>
+          </button>
+        </div>
+        <div class="{{ navMenuClasses }}">
+          <div class="navbar-start">
+            <div class="navbar-item"><a routerLink='/find' routerLinkActive="active">Find Bike or Dock</a></div>
+            <div class="navbar-item"><a routerLink='/travel' routerLinkActive="active">Travel</a></div>
+            <div class="navbar-item"><a routerLink='/about' routerLinkActive="active">About</a></div>
           </div>
-          <div class="navbar-menu">
-            <div class="navbar-end">
-              <div class="navbar-item">
-                <a href="https://github.com/geejay81/map-test" target="_blank">
-                  <i class="fa fa-github fa-lg"></i>
-                </a>
-              </div>
-              <div class="navbar-item">
-                <a href="https://twitter.com/gregparr" target="_blank">
-                  <i class="fa fa-twitter fa-lg"></i>
-                </a>
-              </div>
-              <div class="navbar-item">
-                <a href="https://www.linkedin.com/in/greg-parr-26918741/" target="_blank">
-                  <i class="fa fa-linkedin fa-lg"></i>
-                </a>
-              </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <a href="https://github.com/geejay81/map-test" target="_blank">
+                <i class="fa fa-github fa-lg"></i>
+              </a>
+            </div>
+            <div class="navbar-item">
+              <a href="https://twitter.com/gregparr" target="_blank">
+                <i class="fa fa-twitter fa-lg"></i>
+              </a>
+            </div>
+            <div class="navbar-item">
+              <a href="https://www.linkedin.com/in/greg-parr-26918741/" target="_blank">
+                <i class="fa fa-linkedin fa-lg"></i>
+              </a>
             </div>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
   </div>
   <div class="hero-body">
     <div class="container">
