@@ -17,6 +17,7 @@ import { AirQualityComponent } from './tfl-components/air-quality/air-quality/ai
 import { MapComponent } from './map/map.component';
 import { TravelComponent } from './travel/travel.component';
 import { AboutComponent } from './about/about.component';
+import { LineService } from './services/line/line.service';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +38,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'travel',
-    component: AboutComponent,
+    component: TravelComponent,
     data: {
       pageTitle: 'Travel',
       pageSubtitle: 'Travel and service updates from around the network'
@@ -69,7 +70,11 @@ const appRoutes: Routes = [
     }),
     HttpClientModule
   ],
-  providers: [BikePointService, AirQualityService],
+  providers: [
+    AirQualityService,
+    BikePointService,
+    LineService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
