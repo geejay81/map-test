@@ -1,3 +1,44 @@
-<p>
-  travel works!
-</p>
+
+  <section class="section">
+    <div class="container">
+      <h3 class="title">Summary</h3>
+      <p class="subtitle">'At a glance' information from around the network.</p>
+      <div class="field is-grouped is-grouped-multiline">
+        <div class="control" *ngFor="let line of lineStatuses">
+          <div class="tags has-addons">
+            <span class="{{ 'tag is-medium ' + line.id }}">{{ line.name }}</span>
+            <span
+              *ngFor="let lineStatus of line.lineStatuses"
+              class="{{ 'tag is-medium ' + (lineStatus.statusSeverity === 10 ? 'is-success' : 'is-danger') }}">
+              {{ lineStatus.statusSeverityDescription }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <h3 class="title">London Underground Line Statuses</h3>
+          <p class="subtitle">Check for delays and disruptions on the London Underground Network.</p>
+          <div *ngFor="let line of getLinesByMode('tube')">
+            <article class="{{ 'notification level ' + line.id }}">
+              <div class="level-left">{{ line.name }}</div>
+              <div class="tags level-right" *ngFor="let lineStatus of line.lineStatuses">
+                <span class="{{ 'tag is-medium ' + (lineStatus.statusSeverity === 10 ? 'is-success' : 'is-danger')  }}">
+                  {{ lineStatus.statusSeverityDescription }}
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="column">
+            <h3 class="title">Other Line Statuses</h3>
+            <p class="subtitle">Check for delays and disruptions on other lines on the network.</p>
+            <p>Coming soon ...</p>
+        </div>
+      </div>
+    </div>
+  </section>
