@@ -18,6 +18,7 @@ import { MapComponent } from './map/map.component';
 import { TravelComponent } from './travel/travel.component';
 import { AboutComponent } from './about/about.component';
 import { LineService } from './services/line/line.service';
+import { LineComponent } from './travel/line/line.component';
 
 const appRoutes: Routes = [
   {
@@ -44,6 +45,14 @@ const appRoutes: Routes = [
       pageSubtitle: 'Travel and service updates from around the network'
     }
   },
+  {
+    path: 'line/:lineId',
+    component: LineComponent,
+    data: {
+      pageTitle: 'Line Status',
+      pageSubtitle: 'Status and disruption information by line'
+    }
+  },
   { path: '', redirectTo: '/find', pathMatch: 'full' }
 ];
 
@@ -55,7 +64,8 @@ const appRoutes: Routes = [
     AirQualityComponent,
     MapComponent,
     TravelComponent,
-    AboutComponent
+    AboutComponent,
+    LineComponent
   ],
   imports: [
     RouterModule.forRoot(

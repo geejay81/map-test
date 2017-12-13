@@ -21,4 +21,8 @@ export class HeaderComponent implements OnInit {
     this.navMenuClasses = this.navMenuClasses === 'navbar-menu' ? 'navbar-menu is-active' : 'navbar-menu';
   }
 
+  closeMenu() {
+    this.navMenuClasses.replace(' is-active','');
+  }
+
 }

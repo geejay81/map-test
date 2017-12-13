@@ -15,9 +15,9 @@
         </div>
         <div class="{{ navMenuClasses }}">
           <div class="navbar-start">
-            <div class="navbar-item"><a routerLink='/find' routerLinkActive="active">Find Bike or Dock</a></div>
-            <div class="navbar-item"><a routerLink='/travel' routerLinkActive="active">Travel</a></div>
-            <div class="navbar-item"><a routerLink='/about' routerLinkActive="active">About</a></div>
+            <div class="navbar-item"><a routerLink='/find' routerLinkActive="active" (click)="closeMenu()">Find Bike or Dock</a></div>
+            <div class="navbar-item"><a routerLink='/travel' routerLinkActive="active" (click)="closeMenu()">Travel</a></div>
+            <div class="navbar-item"><a routerLink='/about' routerLinkActive="active" (click)="closeMenu()">About</a></div>
           </div>
           <div class="navbar-end">
             <div class="navbar-item">
