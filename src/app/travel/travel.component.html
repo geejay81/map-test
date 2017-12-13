@@ -6,12 +6,15 @@
       <div class="field is-grouped is-grouped-multiline">
         <div class="control" *ngFor="let line of lineStatuses">
           <div class="tags has-addons">
-            <span class="{{ 'tag is-medium ' + line.id }}">{{ line.name }}</span>
-            <span
+            <a
+              routerLink='/line/{{ line.id }}'
+              class="{{ 'tag is-medium ' + line.id }}">{{ line.name }}</a>
+            <a
+              routerLink='/line/{{ line.id }}'
               *ngFor="let lineStatus of uniqueStatusSeverities(line.lineStatuses)"
               class="{{ 'tag is-medium ' + (lineStatus.statusSeverity === 10 ? 'is-success' : 'is-danger') }}">
               {{ lineStatus.statusSeverityDescription }}
-            </span>
+            </a>
           </div>
         </div>
       </div>

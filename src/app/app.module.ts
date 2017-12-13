@@ -18,6 +18,7 @@ import { MapComponent } from './map/map.component';
 import { TravelComponent } from './travel/travel.component';
 import { AboutComponent } from './about/about.component';
 import { LineService } from './services/line/line.service';
+import { LineComponent } from './travel/line/line.component';
 
 const appRoutes: Routes = [
   {
@@ -34,6 +35,14 @@ const appRoutes: Routes = [
     data: {
       pageTitle: 'Bike Points',
       pageSubtitle: 'Find the nearest bike point with available bikes or free docks'
+    }
+  },
+  {
+    path: 'line/:lineId',
+    component: LineComponent,
+    data: {
+      pageTitle: 'Line Status',
+      pageSubtitle: 'Status and disruption information by line'
     }
   },
   {
@@ -55,7 +64,8 @@ const appRoutes: Routes = [
     AirQualityComponent,
     MapComponent,
     TravelComponent,
-    AboutComponent
+    AboutComponent,
+    LineComponent
   ],
   imports: [
     RouterModule.forRoot(
