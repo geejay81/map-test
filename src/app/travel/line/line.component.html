@@ -1,7 +1,31 @@
-<div class="hero is-danger">
+<div class="{{ 'hero ' + line.id }}">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title">{{ lineId }} line status</h1>
+      <h1 class="title">{{ line.name }}</h1>
+      <h2 class="subtitle">Current Line Status</h2>
     </div>
   </div>
 </div>
+
+<section class="section">
+  <div class="container">
+    <div class="card" *ngFor="let status of line.lineStatuses">
+      <div class="card-header">
+        <p class="card-header-title">
+          {{ status.statusSeverityDescription }}
+        </p>
+      </div>
+      <div class="card-content" *ngIf="status.reason != null">
+        <p class="subtitle">Details</p>
+        <p>{{ status.reason }}</p>
+        <hr>
+        <p *ngIf="status.disruption != null">{{ status.disruption.additionalInfo }}</p>
+        <hr>
+        <p class="subtitle">Affected Routes</p>
+        <ul>
+          <li *ngFor="let route of status.disruption.affectedRoutes">{{ route.name }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

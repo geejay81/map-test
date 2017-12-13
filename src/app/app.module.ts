@@ -38,19 +38,19 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'travel',
-    component: TravelComponent,
-    data: {
-      pageTitle: 'Travel',
-      pageSubtitle: 'Travel and service updates from around the network'
-    }
-  },
-  {
     path: 'line/:lineId',
     component: LineComponent,
     data: {
       pageTitle: 'Line Status',
       pageSubtitle: 'Status and disruption information by line'
+    }
+  },
+  {
+    path: 'travel',
+    component: TravelComponent,
+    data: {
+      pageTitle: 'Travel',
+      pageSubtitle: 'Travel and service updates from around the network'
     }
   },
   { path: '', redirectTo: '/find', pathMatch: 'full' }
