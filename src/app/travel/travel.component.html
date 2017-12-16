@@ -30,11 +30,12 @@
             <article class="{{ 'notification level ' + line.id }}">
               <div class="level-left">{{ line.name }}</div>
               <div class="tags level-right">
-                <span
+                  <a
+                  routerLink='/line/{{ line.id }}'
                   *ngFor="let lineStatus of uniqueStatusSeverities(line.lineStatuses)"
                   class="{{ 'tag is-medium ' + (lineStatus.statusSeverity === 10 ? 'is-success' : 'is-danger')  }}">
                   {{ lineStatus.statusSeverityDescription }}
-                </span>
+                </a>
               </div>
             </article>
           </div>
@@ -46,11 +47,12 @@
             <article class="{{ 'notification level ' + line.id }}">
               <div class="level-left">{{ line.name }}</div>
               <div class="tags level-right">
-                <span
+                <a
+                  routerLink='/line/{{ line.id }}'
                   *ngFor="let lineStatus of uniqueStatusSeverities(line.lineStatuses)"
                   class="{{ 'tag is-medium ' + (lineStatus.statusSeverity === 10 ? 'is-success' : 'is-danger')  }}">
                   {{ lineStatus.statusSeverityDescription }}
-                </span>
+                </a>
               </div>
             </article>
           </div>

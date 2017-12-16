@@ -19,14 +19,23 @@
       <div class="card-content" *ngIf="status.reason != null">
         <p class="subtitle">Details</p>
         <p>{{ status.reason }}</p>
-        <hr>
+        <br>
         <p *ngIf="status.disruption != null">{{ status.disruption.additionalInfo }}</p>
-        <hr>
+        <br>
         <p class="subtitle">Affected Routes</p>
         <ul>
           <li *ngFor="let route of status.disruption.affectedRoutes">{{ route.name }}</li>
         </ul>
       </div>
+      <div class="card-footer">
+      </div>
     </div>
   </div>
 </section>
+
+<div class="{{ 'modal' + (this.isLoading === true ? ' is-active' : '') }}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <img src="assets/images/Spinner.gif" width="100" alt="Loading...">
+  </div>
+</div>
