@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   closeMenu() {
-    this.navMenuClasses.replace(' is-active','');
+    this.navMenuClasses.replace(' is-active', '');
   }
 
 }

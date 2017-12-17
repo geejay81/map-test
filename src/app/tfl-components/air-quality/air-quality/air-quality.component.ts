@@ -1,6 +1,6 @@
 import { AirQualityForecast, AirQualityForecastPeriod } from './../../../models/air-quality-forecast';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AirQualityService } from '../../../services/air-quality/air-quality.service';
+import { AirQualityService } from '../../../_services/air-quality/air-quality.service';
 
 @Component({
   selector: 'app-air-quality',

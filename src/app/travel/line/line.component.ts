@@ -1,4 +1,4 @@
-import { LineService } from './../../services/line/line.service';
+import { LineService } from './../../_services/line/line.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { error } from 'util';
@@ -17,7 +17,9 @@ export class LineComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private lineService: LineService
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.isLoading = true;
     this.route.params.subscribe(
       data => {
@@ -34,8 +36,4 @@ export class LineComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit() {
-  }
-
 }

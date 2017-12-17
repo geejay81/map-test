@@ -9,16 +9,17 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from '@agm/core';
-import { BikePointService } from './services/bike-point/bike-point.service';
-import { AirQualityService } from './services/air-quality/air-quality.service';
+import { BikePointService } from './_services/bike-point/bike-point.service';
+import { AirQualityService } from './_services/air-quality/air-quality.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AirQualityComponent } from './tfl-components/air-quality/air-quality/air-quality.component';
 import { MapComponent } from './map/map.component';
 import { TravelComponent } from './travel/travel.component';
 import { AboutComponent } from './about/about.component';
-import { LineService } from './services/line/line.service';
+import { LineService } from './_services/line/line.service';
 import { LineComponent } from './travel/line/line.component';
+import { BurgerDirective } from './_directives/burger.directive';
 
 const appRoutes: Routes = [
   {
@@ -65,7 +66,8 @@ const appRoutes: Routes = [
     MapComponent,
     TravelComponent,
     AboutComponent,
-    LineComponent
+    LineComponent,
+    BurgerDirective
   ],
   imports: [
     RouterModule.forRoot(

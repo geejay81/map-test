@@ -1,4 +1,4 @@
-import { BikePointService } from '../services/bike-point/bike-point.service';
+import { BikePointService } from '../_services/bike-point/bike-point.service';
 import { Component, ViewChild, Output } from '@angular/core';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { GoogleMapsAPIWrapper } from '@agm/core/services/google-maps-api-wrapper';

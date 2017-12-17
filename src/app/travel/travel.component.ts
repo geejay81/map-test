@@ -1,4 +1,4 @@
-import { LineService } from './../services/line/line.service';
+import { LineService } from './../_services/line/line.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
